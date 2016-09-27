@@ -1,3 +1,4 @@
+#!/bin/env python
 # coding:utf-8
 from multiprocessing import Process, Queue
 import os, time, random
