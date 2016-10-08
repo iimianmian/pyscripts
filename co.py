@@ -1,5 +1,6 @@
 #!/bin/env python3
 import functools
+
 def coroutine(f):
     @functools.wraps(f)
     def _coroutine(*args, **kwargs):
@@ -7,6 +8,7 @@ def coroutine(f):
         next(active_coroutine)
         return active_coroutine
     return _coroutine
+
 @coroutine
 def simple_coroutine():
     print('Setting up the coroutine')
@@ -21,21 +23,27 @@ def simple_coroutine():
         raise
     finally:
         print('Any exit')
+
 print('Creating simple coroutine')
 active_coroutine = simple_coroutine()
 print()
+
 print('Sending spam')
 active_coroutine.send('spam')
 print()
+
 print('Close the coroutine')
 active_coroutine.close()
 print()
+
 print('Creating simple coroutine')
 active_coroutine = simple_coroutine()
 print()
+
 print('Sending eggs')
 active_coroutine.send('eggs')
 print()
+
 print('Throwing runtime error')
 active_coroutine.throw(RuntimeError, 'Oops...')
 print()
